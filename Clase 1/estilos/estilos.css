@@ -1,0 +1,28 @@
+.card{
+    /*establecer borde*/
+    border-width: 5px;
+    border-color: red;
+    border-style: inset;
+    /*establecer dimensiones*/
+    width: 400px;
+    height: 250px;
+    /*establecer margen*/
+    margin-top: 50px;
+    margin-bottom: 0px ;
+    margin-right: auto;
+    margin-left: auto;
+    /*ATAJOS*/
+    /*margin↓ top right bottom left*/
+    /*margin: 50px auto 0px auto;*/
+    /*margin↓ rightAndLeft bottom;*/
+    /*margin: 50px auto 0px*/
+    /*margin↓ topAndBottom rightAndLeft*/
+    /*margin: 50px auto*/  
+    /*NOTA: valores se setean en sentido horario*/ 
+}
+#profilePic{
+    float: left;
+    border: 2px solid red;
+    border-radius: 75px;
+    margin: 10px;
+}
