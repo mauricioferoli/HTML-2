@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Man: Clase de Posicionamiento Pro</title>
+    <style>
+        :root {
+            --spidey-red: #e74c3c;
+            --spidey-blue: #2980b9;
+            --city-gray: #34495e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        section {
+            height: 100vh;
+            border-bottom: 4px solid var(--city-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* Eliminamos overflow: hidden global para que sticky funcione */
+        }
+
+        h2 { background: var(--spidey-red); color: white; padding: 10px 20px; border-radius: 8px; z-index: 10; }
+
+        .btn-group { z-index: 100; display: flex; gap: 10px; margin-top: 20px; }
+
+        .btn {
+            padding: 10px 20px;
+            background: var(--spidey-blue);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-reset { background: #95a5a6; }
+
+        /* --- SECCIÓN 1: RELATIVE (EL SALTO) --- */
+        #relative-section .spidey {
+            width: 100px;
+            height: 100px;
+            background: var(--spidey-red);
+            border: 3px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        #relative-section .spidey.dodge {
+            position: relative; /* [cite: 78, 80] */
+            top: -100px;        /* Se desplaza respecto a su lugar original [cite: 81] */
+            left: 50px;
+            background: #c0392b;
+        }
+
+        .bullet {
+            position: absolute; /* [cite: 83] */
+            width: 40px;
+            height: 10px;
+            background: orange;
+            left: -50px;
+            transition: left 0.5s linear;
+        }
+
+        /* --- SECCIÓN 2: STICKY / FIXED (EL PATRULLAJE) --- */
+        #scroll-section { 
+            height: 250vh; /* Altura extra para permitir el scroll prolongado */
+            display: block; /* Cambiamos a block para el flujo de sticky */
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .spidey-fixed {
+            position: -webkit-sticky;
+            position: sticky; /* Se queda fijo relativo a la ventana [cite: 88, 89] */
+            top: 20px;       /* Distancia desde el borde superior [cite: 90] */
+            margin: 0 auto;
+            width: 120px;
+            height: 120px;
+            background: url('https://img.icons8.com/color/144/spiderman-head.png') no-repeat center/contain;
+            z-index: 1000;
+        }
+
+        /* --- SECCIÓN 3: Z-INDEX (EL RESCATE) --- */
+        .rescue-container {
+            position: relative; /* Requerido para que z-index funcione [cite: 101] */
+            width: 300px;
+            height: 300px;
+            background: #bdc3c7;
+            border: 2px solid var(--city-gray);
+        }
+
+        .person {
+            position: absolute;
+            width: 100px;
+            height: 150px;
+            background: #f1c40f;
+            bottom: 20px;
+            left: 100px;
+            z-index: 10; /* [cite: 94, 96] */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black;
+        }
+
+        .spidey-rescue {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: var(--spidey-red);
+            bottom: 30px;
+            left: 90px;
+            z-index: 5; /* Spidey está detrás al inicio [cite: 98] */
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        /* --- SECCIÓN 4: VISIBILITY (EL ATAQUE) --- */
+        .villain {
+            width: 150px;
+            height: 150px;
+            background: #8e44ad;
+            border: 4px solid #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .hidden-villain {
+            visibility: hidden; /* [cite: 117] */
+        }
+    </style>
+</head>
+<body>
+
+    <section id="relative-section">
+        <h2>1. Esquiva (Position: Relative)</h2>
+        <div class="bullet" id="bullet"></div>
+        <div class="spidey" id="spidey-rel">SPIDEY</div>
+        <div class="btn-group">
+            <button class="btn" onclick="animateDodge()">¡DISPARAR!</button>
+        </div>
+    </section>
+
+    <section id="scroll-section">
+        <h2>2. Patrulla (Position: Sticky)</h2>
+        <div class="spidey-fixed"></div>
+        <div style="height: 1500px; padding: 100px;">
+            <p><b>¡MIRA ARRIBA!</b> Mientras bajas, Spidey se queda "pegado" al borde superior.</p>
+            <p>Esto imita el comportamiento de <b>position: fixed</b> pero dentro de este contenedor[cite: 89, 90].</p>
+        </div>
+    </section>
+
+    <section id="zindex-section">
+        <h2>3. Rescate (Z-Index)</h2>
+        <div class="rescue-container">
+            <div class="person">PERSONA</div>
+            <div class="spidey-rescue" id="spidey-z">SPIDEY</div>
+        </div>
+        <div class="btn-group">
+            <button class="btn" onclick="savePerson()">¡SALVAR (Z-UP)!</button>
+            <button class="btn btn-reset" onclick="resetPerson()">RESETEAR</button>
+        </div>
+    </section>
+
+    <section id="visibility-section">
+        <h2>4. Ataque (Visibility vs Display)</h2>
+        <div class="villain" id="villain">VILLANO</div>
+        <div id="status-box" style="background: #27ae60; color: white; padding: 10px; margin-top: 10px; width: 200px; text-align: center;">
+            EL ESPACIO NO SE MUEVE
+        </div>
+        <div class="btn-group">
+            <button class="btn" onclick="attackVillain()">¡OCULTAR!</button>
+            <button class="btn btn-reset" onclick="resetVillain()">REAPARECER</button>
+        </div>
+    </section>
+
+    <script>
+        // SECCIÓN 1
+        function animateDodge() {
+            const bullet = document.getElementById('bullet');
+            const spidey = document.getElementById('spidey-rel');
+            bullet.style.left = '-50px';
+            setTimeout(() => {
+                bullet.style.left = '120%';
+                setTimeout(() => spidey.classList.add('dodge'), 100);
+                setTimeout(() => spidey.classList.remove('dodge'), 1500);
+            }, 50);
+        }
+
+        // SECCIÓN 3
+        const spideyZ = document.getElementById('spidey-z');
+        function savePerson() {
+            spideyZ.style.zIndex = "20"; // Pasa al frente [cite: 99, 100]
+            spideyZ.style.background = "#2ecc71";
+            spideyZ.innerText = "¡PROTECTOR!";
+        }
+        function resetPerson() {
+            spideyZ.style.zIndex = "5"; // Vuelve atrás [cite: 98]
+            spideyZ.style.background = "#e74c3c";
+            spideyZ.innerText = "SPIDEY";
+        }
+
+        // SECCIÓN 4
+        const villain = document.getElementById('villain');
+        function attackVillain() {
+            villain.classList.add('hidden-villain'); // Invisible pero mantiene espacio [cite: 118]
+        }
+        function resetVillain() {
+            villain.classList.remove('hidden-villain'); // Visible de nuevo [cite: 116]
+        }
+    </script>
+</body>
+</html>

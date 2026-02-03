@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Desafío JS/CSS: Spider-Man</title>
+    <style>
+        :root { --spidey-red: #e74c3c; --spidey-blue: #2980b9; }
+        body { font-family: 'Comic Sans MS', sans-serif; margin: 0; background: #f4f4f4; text-align: center; }
+        section { height: 100vh; border-bottom: 3px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+
+        /* --- CSS CAP 4: RELATIVE --- */
+        .spidey-box {
+            width: 100px; height: 100px; background: var(--spidey-red); border: 3px solid black;
+            color: white; font-weight: bold; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .saltar {
+            /* RETO CSS: Define la posición relativa y el desplazamiento */
+            /* COMPLETAR: position, top, left */
+        }
+
+        /* --- CSS CAP 6: Z-INDEX --- */
+        .escena-rescate { position: relative; width: 300px; height: 200px; background: #ddd; border: 2px solid #333; }
+        .civil {
+            position: absolute; width: 60px; height: 100px; background: orange;
+            bottom: 10px; left: 120px;
+            z-index: 10; /* La persona está en la capa 10 [cite: 98] */
+        }
+        .spidey-hero {
+            position: absolute; width: 80px; height: 80px; background: var(--spidey-red);
+            bottom: 20px; left: 110px;
+            /* RETO CSS: Debe iniciar con un z-index menor al del civil [cite: 97] */
+            /* COMPLETAR: z-index */
+        }
+
+        /* --- CSS CAP 7: VISIBILITY --- */
+        .villano { width: 120px; height: 120px; background: purple; color: white; display: flex; align-items: center; justify-content: center; }
+        .invisible {
+            /* RETO CSS: Usa la propiedad que oculta pero mantiene el espacio [cite: 117] */
+            /* COMPLETAR: visibility */
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <h2>1. Esquiva el ataque (Position Relative)</h2>
+        <div class="spidey-box" id="spidey-4">SPIDEY</div>
+        <button onclick="retoRelativo()">¡SALTAR!</button>
+    </section>
+
+    <section>
+        <h2>2. El Rescate (Z-Index)</h2>
+        <div class="escena-rescate">
+            <div class="civil">PERSONA</div>
+            <div class="spidey-hero" id="spidey-6">SPIDEY</div>
+        </div>
+        <button onclick="retoZIndex()">¡SALVAR!</button>
+    </section>
+
+    <section>
+        <h2>3. Camuflaje (Visibility)</h2>
+        <div class="villano" id="villano-7">VILLANO</div>
+        <div style="background: green; color: white; padding: 10px; margin-top: 10px;">
+            SI ESTE BLOQUE NO SUBE, ¡LO LOGRASTE!
+        </div>
+        <button onclick="retoVisibilidad()">ATACAR</button>
+    </section>
+
+    <script>
+        // RETO CAP 4: RELATIVE
+        function retoRelativo() {
+            const spidey = document.getElementById('spidey-4');
+            // RETO JS: Agrega o quita la clase 'saltar'
+            // COMPLETAR: spidey.classList.toggle('...');
+        }
+
+        // RETO CAP 6: Z-INDEX
+        function retoZIndex() {
+            const spidey = document.getElementById('spidey-6');
+            // RETO JS: Cambia el z-index para que sea mayor a 10 [cite: 100]
+            // COMPLETAR: spidey.style.zIndex = "...";
+            spidey.style.background = "gold";
+            spidey.innerText = "¡HÉROE!";
+        }
+
+        // RETO CAP 7: VISIBILITY
+        function retoVisibilidad() {
+            const villano = document.getElementById('villano-7');
+            // RETO JS: Aplica la clase que usa 'visibility: hidden' [cite: 117]
+            // COMPLETAR: villano.classList.add('...');
+        }
+    </script>
+</body>
+</html>

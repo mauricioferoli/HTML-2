@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Desafío CSS: Spider-Man</title>
+    <style>
+        :root { --spidey-red: #e74c3c; --spidey-blue: #2980b9; }
+        body { font-family: sans-serif; margin: 0; background: #f4f4f4; }
+        section { height: 100vh; border-bottom: 2px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        /* --- ESTILOS DE LA SECCIÓN 1 (CAP 4) --- */
+        #cap4-relative .spidey:hover {
+            /*width: 150px;*/
+            /* RETO: Haz que Spidey sea RELATIVO y desplázalo hacia arriba y derecha */
+            /* COMPLETAR AQUÍ: position, top, left */
+            position: relative;
+            top: -150;
+            left: 100px;
+        }
+
+        /* --- ESTILOS DE LA SECCIÓN 2 (CAP 5) --- */
+        #cap5-sticky { height: 200vh; display: block; padding-top: 50px; }
+        .spidey-patrol {
+            width: 100px;
+            /*PRACTICA DE ABSOLUTE*/
+            position: relative;
+            
+            /* RETO: Haz que Spidey sea STICKY (o fijo) para que no se mueva al bajar */
+            /* COMPLETAR AQUÍ: position, top */
+            margin: 0 auto;
+        }
+
+        /* --- ESTILOS DE LA SECCIÓN 3 (CAP 6) --- */
+        .city-container { position: relative; width: 300px; height: 300px; background: #bdc3c7; }
+        .civil {
+            position: absolute;
+            width: 80px; height: 120px; background: orange;
+            bottom: 20px; left: 110px;
+            /* RETO: La persona debe estar detrás de Spidey al final (Z-INDEX bajo) */
+            /* COMPLETAR AQUÍ: z-index */
+        }
+        .spidey-hero {
+            position: absolute;
+            width: 100px; height: 100px;
+            bottom: 30px; left: 100px;
+            /* RETO: Spidey debe estar AL FRENTE (Z-INDEX alto) */
+            /* COMPLETAR AQUÍ: z-index */
+        }
+
+        /* --- ESTILOS DE LA SECCIÓN 4 (CAP 7) --- */
+        .villain-box {
+            width: 150px; height: 150px; background: #8e44ad;
+            /* RETO: Usa la propiedad que oculta al villano pero mantiene su espacio */
+            /* COMPLETAR AQUÍ: la propiedad de visibilidad */
+        }
+    </style>
+</head>
+<body>
+    <div style="position: fixed; bottom: 50px; right: 50px;">
+        <img src="img/sp2.jpg" width="50px" height="50px">
+    </div>
+    <section id="cap4-relative">
+        <h2>Capítulo 4: El Salto (Position Relative)</h2>
+        <div style="width: 100px; height: 100px; background: red;"><imgsrc="img/sp1.jpg"></div>
+    </section>
+
+    <section id="cap5-sticky">
+        <h2>Capítulo 5: Patrulla Ciudadana (Sticky/Fixed)</h2>
+        <div style="width: 80px; height: 80px; background: blue; margin: 0 auto;"><img id=src="img/sp2.jpg"></div>
+        <p style="margin-top: 500px;">Haz scroll para ver si Spidey se queda contigo.</p>
+    </section>
+
+    <section id="cap6-zindex">
+        <h2>Capítulo 6: El Rescate (Z-Index)</h2>
+        <div class="city-container">
+            <div class="civil">PERSONA</div>
+            <div class="spidey-hero">SPIDERMAN</div>
+        </div>
+    </section>
+
+    <section id="cap7-visibility">
+        <h2>Capítulo 7: Camuflaje (Visibility vs Display)</h2>
+        <div class="villain-box"><img src="img/venom.png"></div>
+        <div style="background: green; color: white; padding: 10px;">ESTE BLOQUE NO DEBE MOVERSE</div>
+        <p>Si usaste la propiedad correcta, el bloque verde sigue en su sitio.</p>
+    </section>
+
+</body>
+</html>
